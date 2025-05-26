@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Generative AI Presentation</title>
+<style>
+  /* Reset and base */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #001529 0%, #0a183d 100%);
+    color: #e6f0ff;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .presentation-container {
+    max-width: 960px;
+    margin: 3rem auto 4rem auto;
+    background: linear-gradient(180deg, #0b2140 0%, #001b34 100%);
+    border-radius: 16px;
+    box-shadow:
+      0 8px 20px rgb(0 0 0 / 0.6),
+      inset 0 0 60px rgba(30, 60, 120, 0.7);
+    padding: 2rem 3rem;
+    display: flex;
+    flex-direction: column;
+    min-height: 600px;
+  }
+
+  h1, h2, h3 {
+    margin: 0 0 1rem 0;
+    font-weight: 700;
+    letter-spacing: 0.015em;
+    text-shadow:
+      0 0 6px rgba(0, 90, 255, 0.7),
+      0 2px 6px rgba(0, 0, 20, 0.8);
+  }
+
+  h1 {
+    font-size: 44px;
+    color: #a6c8ff;
+    text-align: center;
+    margin-bottom: 0.3rem;
+  }
+  h2 {
+    font-size: 32px;
+    color: #8db9ff;
+    border-left: 4px solid #3a6aff;
+    padding-left: 0.75rem;
+    margin-top: 16px;
+    margin-bottom: 20px;
+  }
+  h3 {
+    font-size: 24px;
+    color: #9bbcff;
+  }
+
+  p, ul {
+    font-size: 22px;
+    line-height: 1.45;
+    color: #c8d7ff;
+  }
+
+  ul {
+    padding-left: 1.5rem;
+  }
+  ul li {
+    margin: 0.75rem 0;
+    position: relative;
+    padding-left: 1.25rem;
+  }
+  ul li::before {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #5a8bff;
+    border-radius: 50%;
+    left: 0;
+    top: 0.6em;
+    box-shadow:
+      0 0 6px rgba(90, 139, 255, 0.7),
+      inset 0 0 4px rgba(255 255 255 0.4);
+  }
+  ul ul li::before {
+    background: #375abf;
+    box-shadow:
+      0 0 4px rgba(55, 90, 191, 0.7),
+      inset 0 0 3px rgba(255 255 255 0.3);
+  }
+
+  /* Slide container */
+  .slide {
+    display: none;
+    flex-direction: column;
+    animation: fadeIn 0.8s ease forwards;
+    user-select: none;
+  }
+  .slide.active {
+    display: flex;
+  }
+
+  @keyframes fadeIn {
+    from {opacity: 0; transform: translateY(18px);}
+    to {opacity:1; transform: translateY(0);}
+  }
+
+  /* Footer with slide number */
+  footer {
+    margin-top: auto;
+    text-align: right;
+    font-size: 16px;
+    color: #627db2cc;
+    font-style: italic;
+    padding-top: 1rem;
+    user-select: none;
+  }
+
+  /* Navigation Controls */
+  #navigation {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding-top: 2rem;
+  }
+  #navigation button {
+    background: #224488;
+    border: none;
+    color: #cbd9ff;
+    padding: 0.6rem 1.8rem;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow:
+      0 0 14px rgba(30, 80, 200, 0.4);
+    transition:
+      background-color 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+  #navigation button:hover:not(:disabled) {
+    background-color: #4d75ff;
+    box-shadow:
+      0 0 20px rgba(77, 117, 255, 1);
+  }
+  #navigation button:disabled {
+    background-color: #0c1a3b;
+    color: #445580;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+
+  /* Slide 1 special styling */
+  .slide1-title {
+    font-weight: 900;
+    font-size: 52px;
+    margin-bottom: 0;
+    text-align: center;
+    color: #a9caff;
+    text-shadow:
+      0 0 10px #4d87ff,
+      0 4px 10px rgba(0,0,40,0.65);
+  }
+  .slide1-subtitle {
+    font-size: 26px;
+    text-align: center;
+    margin-top: 0.25rem;
+    color: #c5d4ffcc;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+  }
+  /* New slide styling for "Who I am" */
+  .whoami-container {
+    text-align: center;
+    margin-top: 3rem;
+    color: #a0b9ff;
+  }
+  .whoami-name {
+    font-size: 34px;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    color: #739cff;
+    text-shadow: 0 0 8px #507ade;
+  }
+  .whoami-role {
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 0.4rem;
+    color: #8cbaff;
+  }
+  .whoami-study {
+    font-size: 20px;
+    font-weight: 400;
+    color: #9dbfff;
+  }
+  /* Thanks slide styling */
+  .thanks-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+    color: #a9caff;
+    text-shadow: 0 0 10px #4d87ff;
+  }
+  .thanks-title {
+    font-size: 48px;
+    font-weight: 900;
+    margin-bottom: 1rem;
+  }
+  .thanks-graphic {
+    width: 120px;
+    height: 120px;
+    fill: #5f87ff;
+    filter: drop-shadow(0 0 6px #4f7fff);
+    animation: float 3s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% {transform: translateY(0);}
+    50% {transform: translateY(-15px);}
+  }
+</style>
+</head>
+<body>
+<div class="presentation-container" role="main" aria-label="Generative AI Presentation">
+
+  <!-- Slide 1 -->
+  <section class="slide active" id="slide1" aria-label="Title Slide">
+    <h1 class="slide1-title">Generative AI (GenAI)</h1>
+    <p class="slide1-subtitle">An overview of Generative AI and its applications</p>
+    <footer>Slide 1 of 13</footer>
+  </section>
+
+  <!-- Slide 2 (Who I am) -->
+  <section class="slide" id="slide2" aria-label="Who I am">
+    <h2>Who I am</h2>
+    <div class="whoami-container">
+      <div class="whoami-name">Manar Abdelhalim</div>
+      <div class="whoami-role">AI Cloud Engineer, GIS Specialist at QSIT (Quality Standards For Information Technology)</div>
+      <div class="whoami-study">Master's degree student at Ain Shams University</div>
+    </div>
+    <footer>Slide 2 of 13</footer>
+  </section>
+
+  <!-- Slide 3 -->
+  <section class="slide" id="slide3" aria-label="Introduction to Generative AI">
+    <h2>Generative AI</h2>
+    <ul>
+      <li>Has become a prominent buzzword in tech circles</li>
+      <li>A subset of artificial intelligence, which itself is:
+        <ul>
+          <li>A scientific discipline</li>
+          <li>A branch of computer science focused on creating intelligent agents</li>
+          <li>Systems capable of reasoning, learning, and autonomous decision-making</li>
+        </ul>
+      </li>
+    </ul>
+    <footer>Slide 3 of 13</footer>
+  </section>
+
+  <!-- Slide 4 -->
+  <section class="slide" id="slide4" aria-label="Machine Learning">
+    <h2>Machine Learning (ML)</h2>
+    <ul>
+      <li>A subfield of AI where systems:
+        <ul>
+          <li>Train models using input data</li>
+          <li>Make predictions on new, unseen data from similar sources</li>
+        </ul>
+      </li>
+      <li>Key characteristic: Enables computers to learn without explicit programming</li>
+    </ul>
+    <footer>Slide 4 of 13</footer>
+  </section>
+
+  <!-- Slide 5 -->
+  <section class="slide" id="slide5" aria-label="ML Model Types">
+    <h2>ML Model Types</h2>
+    <ul>
+      <li>Supervised Learning:
+        <ul>
+          <li>Uses labeled data (tagged with names/types/numbers)</li>
+          <li>Learns from historical examples to predict future values</li>
+          <li>Example: Predicting tip amounts based on bill totals</li>
+        </ul>
+      </li>
+      <li>Unsupervised Learning:
+        <ul>
+          <li>Works with unlabeled data</li>
+          <li>Discovers natural groupings/patterns in raw data</li>
+        </ul>
+      </li>
+    </ul>
+    <footer>Slide 5 of 13</footer>
+  </section>
+
+  <!-- Slide 6 -->
+  <section class="slide" id="slide6" aria-label="Deep Learning">
+    <h2>Deep Learning</h2>
+    <ul>
+      <li>An advanced ML approach using:
+        <ul>
+          <li>Artificial Neural Networks (inspired by human brain structure)</li>
+          <li>Composed of interconnected neurons that process data to make predictions</li>
+        </ul>
+      </li>
+      <li>Capable of handling more complex patterns than traditional ML</li>
+      <li>Supports semi-supervised learning:
+        <ul>
+          <li>Combines small labeled datasets with large unlabeled ones</li>
+          <li>Enhances model generalization</li>
+        </ul>
+      </li>
+    </ul>
+    <footer>Slide 6 of 13</footer>
+  </section>
+
+  <!-- Slide 7 -->
+  <section class="slide" id="slide7" aria-label="Generative AI Fundamentals">
+    <h2>Generative AI Fundamentals</h2>
+    <ul>
+      <li>A deep learning subset leveraging neural networks</li>
+      <li>Processes both labeled and unlabeled data</li>
+      <li>Utilizes supervised, unsupervised, and semi-supervised methods</li>
+    </ul>
+    <footer>Slide 7 of 13</footer>
+  </section>
+
+  <!-- Slide 8 -->
+  <section class="slide" id="slide8" aria-label="Model Categories">
+    <h2>Model Categories</h2>
+    <ul>
+      <li>Discriminative Models:
+        <ul>
+          <li>Classify/predict labels for data points</li>
+          <li>Learn relationships between features and labels</li>
+          <li>Example: Distinguishing cats from dogs</li>
+        </ul>
+      </li>
+      <li>Generative Models:
+        <ul>
+          <li>Create new data instances based on learned probability distributions</li>
+          <li>Learn joint probability distributions (P(x,y))</li>
+          <li>Example: Generating original dog images</li>
+        </ul>
+      </li>
+    </ul>
+    <footer>Slide 8 of 13</footer>
+  </section>
+
+  <!-- Slide 9 -->
+  <section class="slide" id="slide9" aria-label="GenAI Output Criteria">
+    <h2>GenAI Output Criteria</h2>
+    <ul>
+      <li>Is GenAI: Natural language, audio, images, video</li>
+      <li>Not GenAI: Numbers, class labels (e.g., "spam"), probabilities</li>
+    </ul>
+    <footer>Slide 9 of 13</footer>
+  </section>
+
+  <!-- Slide 10 -->
+  <section class="slide" id="slide10" aria-label="Foundation Models">
+    <h2>Foundation Models</h2>
+    <ul>
+      <li>Large-scale AI models pre-trained on vast datasets</li>
+      <li>Adaptable to diverse downstream tasks:
+        <ul>
+          <li>Sentiment analysis</li>
+          <li>Image captioning</li>
+          <li>Fraud detection</li>
+          <li>Customer support automation</li>
+        </ul>
+      </li>
+      <li>Transformative potential across industries (healthcare, finance, etc.)</li>
+    </ul>
+    <footer>Slide 10 of 13</footer>
+  </section>
+
+  <!-- Slide 11 -->
+  <section class="slide" id="slide11" aria-label="GenAI Applications">
+    <h2>GenAI Applications</h2>
+    <ul>
+      <li>Text-to-Text: Language translation</li>
+      <li>Text-to-Image: Image generation from descriptions (e.g., diffusion models)</li>
+      <li>Text-to-Video: Video creation from scripts</li>
+      <li>Text-to-Task: Action execution based on text input (e.g., GUI navigation)</li>
+    </ul>
+    <footer>Slide 11 of 13</footer>
+  </section>
+
+  <!-- Slide 12 -->
+  <section class="slide" id="slide12" aria-label="Google's GenAI Tools">
+    <h2>Google's GenAI Tools</h2>
+    <ul>
+      <li>Vertex AI Studio:
+        <ul>
+          <li>Rapid exploration/customization of GenAI models</li>
+          <li>Includes:
+            <ul>
+              <li>Pre-trained model library</li>
+              <li>Fine-tuning tools</li>
+              <li>Production deployment features</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Vertex AI Agent Builder:
+        <ul>
+          <li>Enables no-code development of:
+            <ul>
+              <li>AI chatbots</li>
+              <li>Custom search engines</li>
+              <li>Knowledge bases</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Gemini:
+        <ul>
+          <li>Multimodal AI model handling:
+            <ul>
+              <li>Text, images, audio, code</li>
+            </ul>
+          </li>
+          <li>Features:
+            <ul>
+              <li>Code debugging/translation</li>
+              <li>SQL query generation</li>
+              <li>Documentation automation</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <footer>Slide 12 of 13</footer>
+  </section>
+
+  <!-- Slide 13: Thanks for Reading -->
+  <section class="slide" id="slide13" aria-label="Thank You">
+    <div class="thanks-container">
+      <h1 class="thanks-title">Thanks for Reading</h1>
+      <svg class="thanks-graphic" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" aria-label="Smiling robot icon">
+        <circle cx="32" cy="32" r="30" fill="#4a70e2" />
+        <rect x="18" y="18" width="28" height="20" rx="4" ry="4" fill="#879dff" />
+        <circle cx="24" cy="28" r="4" fill="#001a40" />
+        <circle cx="40" cy="28" r="4" fill="#001a40" />
+        <rect x="22" y="40" width="20" height="6" rx="3" ry="3" fill="#506ad7" />
+        <path d="M24 44c2 2 12 2 14 0" stroke="#001a40" stroke-width="2" stroke-linecap="round" />
+      </svg>
+    </div>
+    <footer>Slide 13 of 13</footer>
+  </section>
+
+  <!-- Navigation buttons -->
+  <nav id="navigation" aria-label="Slide Controls">
+    <button id="prevBtn" disabled aria-disabled="true" aria-label="Previous Slide" type="button">Previous</button>
+    <button id="nextBtn" aria-label="Next Slide" type="button">Next</button>
+  </nav>
+
+</div>
+
+<script>
+  (() => {
+    const slides = [...document.querySelectorAll('.slide')];
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    let currentIndex = 0;
+
+    function updateSlide() {
+      slides.forEach((slide, idx) => slide.classList.toggle('active', idx === currentIndex));
+      prevBtn.disabled = currentIndex === 0;
+      nextBtn.disabled = currentIndex === slides.length - 1;
+      prevBtn.setAttribute('aria-disabled', prevBtn.disabled);
+      nextBtn.setAttribute('aria-disabled', nextBtn.disabled);
+    }
+
+    prevBtn.addEventListener('click', () => {
+      if(currentIndex > 0) {
+        currentIndex--;
+        updateSlide();
+      }
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if(currentIndex < slides.length - 1) {
+        currentIndex++;
+        updateSlide();
+      }
+    });
+
+    // Keyboard navigation for accessibility
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') {
+        if(currentIndex < slides.length - 1) {
+          currentIndex++;
+          updateSlide();
+        }
+      } else if (e.key === 'ArrowLeft') {
+        if(currentIndex > 0) {
+          currentIndex--;
+          updateSlide();
+        }
+      }
+    });
+  })();
+</script>
+</body>
+</html>
+
