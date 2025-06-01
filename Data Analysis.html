@@ -1,0 +1,357 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Data Analysis: Your Secret Weapon for Career Growth</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+  body {
+    margin: 0;
+    background-color: #0a2540; /* dark blue */
+    font-family: 'Inter', sans-serif;
+    color: #e1e6f0;
+    line-height: 1.6;
+  }
+  .container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 1rem 2rem 3rem 2rem;
+  }
+  h1 {
+    font-weight: 700;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: #a1c8fd;
+    text-shadow: 0 0 10px #5a90e0;
+  }
+  section {
+    background: #122e57;
+    border-radius: 12px;
+    padding: 1.8rem 2rem 2rem 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 0 15px rgb(25 60 110 / 0.7);
+  }
+  section:nth-child(odd) {
+    background: #0f294e;
+  }
+  h2 {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    color: #9fc9ff;
+  }
+  h2 svg {
+    width: 30px;
+    height: 30px;
+    margin-right: 12px;
+    flex-shrink: 0;
+    fill: #88b2f9;
+  }
+  ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  ul li {
+    padding-left: 2.5rem;
+    position: relative;
+    margin-bottom: 0.8rem;
+    font-size: 1.05rem;
+  }
+  ul li::before {
+    content: "✔️";
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 1.2rem;
+    line-height: 1;
+  }
+  p.highlight {
+    background-color: #2d4f8c;
+    padding: 1rem 1.3rem;
+    margin: 1rem 0 0 0;
+    border-radius: 8px;
+    font-style: italic;
+    font-weight: 600;
+    color: #b9d2ff;
+    box-shadow: inset 0 0 8px #5a8ffe;
+  }
+  .tools {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1.2rem;
+  }
+  .tool-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #a3c0ff;
+    font-size: 0.9rem;
+    width: 80px;
+  }
+  .tool-icon svg {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 6px;
+    fill: #7299f8;
+    filter: drop-shadow(0 0 1.5px #3c5fadcc);
+  }
+  blockquote {
+    border-left: 4px solid #7299f8;
+    margin: 1.4rem 0 0 0;
+    padding-left: 1rem;
+    font-style: italic;
+    color: #accdff;
+    font-size: 1.2rem;
+  }
+  /* Excel table styling */
+  .excel-table {
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    min-width: 320px;
+    box-shadow: 0 0 10px #2a52a1;
+    border-radius: 8px;
+    overflow: hidden;
+    table-layout: fixed;
+    word-wrap: break-word;
+    word-break: break-word;
+    margin: 1rem auto 0 auto;
+  }
+  .excel-table caption {
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #a7c3ff;
+    margin-bottom: 0.8rem;
+  }
+  .excel-table th, .excel-table td {
+    border: 1px solid #1c326d;
+    padding: 10px 12px;
+    font-weight: 500;
+    vertical-align: middle;
+    text-align: center;
+  }
+  .excel-table th {
+    background: #1e3a77;
+    color: #c6d7ff;
+  }
+  .excel-table tbody tr:nth-child(even) {
+    background-color: #16305d;
+  }
+  /* Who I am section style */
+  #who-am-i {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: linear-gradient(135deg, #1a3669 0%, #0b1e36 100%);
+    border-radius: 16px;
+    box-shadow: 0 0 20px #3463b3a1;
+    margin-bottom: 2.5rem;
+    color: #accdff;
+    font-size: 1.15rem;
+    font-weight: 500;
+  }
+  #who-am-i h2 {
+    color: #a8c6ff;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    text-shadow: 0 0 10px #3f6bc6;
+    justify-content: center;
+  }
+  #who-am-i p {
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+  #who-am-i span {
+    color: #81aaff;
+    font-weight: 600;
+  }
+  /* Thanks slide */
+  #thanks {
+    background: linear-gradient(135deg, #1a3669 0%, #0b1e36 100%);
+    border-radius: 16px;
+    box-shadow: 0 0 30px #4a7cf3aa;
+    padding: 3rem 2rem;
+    text-align: center;
+    color: #a5cafc;
+    font-size: 2rem;
+    font-weight: 700;
+    text-shadow: 0 0 15px #6b92ff;
+    margin-top: 3rem;
+  }
+  #thanks svg {
+    margin: 1.5rem 0 0 0;
+    width: 80px;
+    height: 80px;
+    fill: #a5cafc;
+    filter: drop-shadow(0 0 4px #6b92ff88);
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>Data Analysis: Your Secret Weapon for Career Growth</h1>
+
+    <section id="who-am-i" aria-label="Who I am introduction">
+      <h2>Who I am</h2>
+      <p>
+        <span>Manar Abdelhalim</span><br />
+        AI Cloud Engineer, GIS Specialist at QSIT (Quality Standards For Information Technology)<br />
+        Master's degree student at Ain Shams University
+      </p>
+    </section>
+
+    <section id="understand-data" aria-label="Understanding the Data">
+      <h2>
+        <svg aria-hidden="true" viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="7" stroke="#88b2f9" stroke-width="2" fill="none"/>
+          <line x1="16" y1="16" x2="21" y2="21" stroke="#88b2f9" stroke-width="2" />
+        </svg>
+        1. Start with Understanding the Data
+      </h2>
+      <p>Before diving into tools or visualizations, <strong>understand your dataset</strong>. Ask:</p>
+      <ul>
+        <li>What variables matter? (e.g., roles, salaries, industries)</li>
+        <li>Are there gaps or inconsistencies?</li>
+      </ul>
+      <p>This step ensures you’re working with clean, relevant data.</p>
+    </section>
+
+    <section id="pivot-tables" aria-label="Explore Patterns with Pivot Tables">
+      <h2>
+        <svg aria-hidden="true" viewBox="0 0 24 24">
+          <path d="M3 6h18M3 10h18M3 14h18" stroke="#88b2f9" stroke-width="2" stroke-linecap="round"/>
+          <rect x="4" y="7" width="16" height="2" fill="#5c80e8" />
+          <rect x="4" y="11" width="16" height="2" fill="#7299f8" />
+          <rect x="4" y="15" width="16" height="2" fill="#5c80e8" />
+        </svg>  
+        2. Explore Patterns with Pivot Tables
+      </h2>
+      <ul>
+        <li>Summarizes large datasets <em>without formulas</em>.</li>
+        <li>Groups data (e.g., average salary by job title or experience level).</li>
+        <li>Reveals trends (e.g., which tech specializations pay significantly more).</li>
+      </ul>
+      <p class="highlight">Pro Tip: Use pivot tables to benchmark salaries before negotiations!</p>
+
+      <table class="excel-table" aria-describedby="excel-caption">
+        <caption id="excel-caption">Sample Salary Data by Job Title</caption>
+        <thead>
+          <tr>
+            <th>Job Title</th>
+            <th>Experience Level</th>
+            <th>Average Salary ($)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Data Analyst</td><td>Junior</td><td>55,000</td></tr>
+          <tr><td>Data Analyst</td><td>Senior</td><td>85,000</td></tr>
+          <tr><td>Data Scientist</td><td>Junior</td><td>75,000</td></tr>
+          <tr><td>Data Scientist</td><td>Senior</td><td>120,000</td></tr>
+          <tr><td>Cloud Architect</td><td>Senior</td><td>170,000</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top: 1rem; font-size: 0.95rem; color: #b7cdff; max-width: 700px; margin-left:auto; margin-right:auto;">
+        This example table demonstrates how pivot tables summarize salary by job title and experience level, revealing trends to inform decisions like salary negotiation or career growth.
+      </p>
+    </section>
+
+    <section id="visualize-story" aria-label="Visualize to Tell the Story">
+      <h2>
+        <svg aria-hidden="true" viewBox="0 0 24 24">
+          <rect x="3" y="14" width="3" height="7" fill="#4a7cf3" />
+          <rect x="9" y="10" width="3" height="11" fill="#598eef" />
+          <rect x="15" y="6" width="3" height="15" fill="#7cadff" />
+        </svg>
+        3. Visualize to Tell the Story
+      </h2>
+      <p>Data visualization isn’t just about charts—it’s about <em>storytelling</em>. Tools like:</p>
+      <ul>
+        <li><strong>Infogram</strong> (AI-powered dashboards)</li>
+        <li><strong>Tableau / Power BI</strong> (interactive reports)</li>
+        <li><strong>Python</strong> (Matplotlib / Seaborn) for custom analysis</li>
+      </ul>
+      <p>Example: A heatmap of in-demand skills vs. salaries speaks louder than a spreadsheet.</p>
+    </section>
+
+    <section id="power-change" aria-label="The Real Power Changing Minds">
+      <h2>
+        <svg aria-hidden="true" viewBox="0 0 24 24">
+          <path d="M12 2a5 5 0 0 0-5 5c0 1.493 1 4 1 4h8s1-2.507 1-4a5 5 0 0 0-5-5zm0 15a7 7 0 0 0-7 7h14a7 7 0 0 0-7-7z" fill="#84a9ff"/>
+        </svg>
+        4. The Real Power? Changing Minds
+      </h2>
+      <p>Data is only valuable if it drives action. For instance:</p>
+      <ul>
+        <li><em>Weak Insight:</em> "Senior roles pay more."</li>
+        <li><em>Strong Insight:</em> "Cloud architects earn 30% more than DevOps in XYZ market—upskilling here could boost your value."</li>
+      </ul>
+      <p>Use data to challenge assumptions and guide decisions.</p>
+    </section>
+
+    <section aria-label="Final Thought">
+      <blockquote>
+        Data analysis isn’t just for analysts. Whether you’re negotiating a raise, planning a career pivot, or leading a team, these skills help you <strong>back your choices with evidence</strong>.
+      </blockquote>
+    </section>
+
+    <section id="tools" aria-label="Tools Mentioned">
+      <h2>
+        <svg aria-hidden="true" viewBox="0 0 24 24">
+          <path d="M4 4h16v16H4z" fill="#3a5cc7" stroke="#7299f8" stroke-width="2" />
+        </svg>
+        Tools Mentioned
+      </h2>
+      <div class="tools" aria-label="List of Tools">
+        <div class="tool-icon" title="Excel / Google Sheets Pivot Tables">
+          <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+            <rect x="8" y="12" width="16" height="40" fill="#1d6f42"/>
+            <rect x="28" y="16" width="28" height="8" fill="#107c41"/>
+            <rect x="28" y="28" width="28" height="8" fill="#2a9d43"/>
+            <rect x="28" y="40" width="28" height="8" fill="#107c41"/>
+          </svg>
+          Excel / Sheets
+        </div>
+        <div class="tool-icon" title="Infogram (AI Visualization)">
+          <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+            <circle cx="32" cy="32" r="24" fill="#5b86e5"/>
+            <path d="M20 38h8v8h-8z" fill="#ade2ff"/>
+            <path d="M36 22h8v24h-8z" fill="#82caff"/>
+          </svg>
+          Infogram
+        </div>
+        <div class="tool-icon" title="Tableau / Power BI">
+          <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+            <rect x="10" y="18" width="8" height="28" fill="#75aaff"/>
+            <rect x="26" y="14" width="8" height="32" fill="#507ee8"/>
+            <rect x="42" y="8" width="8" height="38" fill="#7eafff"/>
+          </svg>
+          Tableau / Power BI
+        </div>
+        <div class="tool-icon" title="Python (Matplotlib/Seaborn)">
+          <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+            <path d="M32 8c-9.94 0-18 8.06-18 18s8.06 18 18 18c9.94 0 18-8.06 18-18s-8.06-18-18-18zm0 32c-7.72 0-14-6.28-14-14s6.28-14 14-14 14 6.28 14 14-6.28 14-14 14z" fill="#3f7df9"/>
+            <circle cx="32" cy="32" r="6" fill="#aabfff"/>
+          </svg>
+          Python
+        </div>
+      </div>
+    </section>
+
+    <section id="thanks" aria-label="Thanks For Reading">
+      <p>Thanks For Reading!</p>
+      <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false" >
+        <circle cx="32" cy="32" r="30" stroke="#a5cafc" stroke-width="3" fill="none"/>
+        <path d="M20 32l10 10 14-18" stroke="#a5cafc" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </section>
+
+  </div>
+</body>
+</html>
+
+
